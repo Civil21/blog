@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_action :article, only: [:show]
+  before_action :article, only: %i[show edit update]
   def index
     @articles = Article.all
   end
@@ -9,6 +9,8 @@ class ArticlesController < ApplicationController
   def new
     @article = Article.new
   end
+
+  def edit; end
 
   def create
     @article = Article.new(article_params)
@@ -21,6 +23,11 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def update
+    article.update(article_params)
+    redirect_to article
+  end
+
   private
 
   def article
@@ -28,6 +35,6 @@ class ArticlesController < ApplicationController
   end
 
   def article_params
-    params.require(:article).permit(:title, :body)
+    params.require(:article).permit(:title, :body, :image, images: [])
   end
 end

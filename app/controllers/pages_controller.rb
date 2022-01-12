@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   def index
-    @articles = Article.limit(5)
+    @articles = Article.limit(10)
   end
 
   def about; end
