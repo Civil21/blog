@@ -5,3 +5,11 @@
 </div>
 <p><%=@article.body%></p>
 <%=render "articles/show/images", images: @article.images%>
+
+<h2>Comments:</h2>
+<div class="">
+  <%=render @comments%>
+</div>
+<div class="">
+  <%= render "comments/form"%>
+</div>
