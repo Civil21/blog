@@ -7,6 +7,9 @@ class User < ApplicationRecord
   has_many :articles
   has_many :comments
 
+  validates :name, length: {minimum: 3}
+
+
   def username
     name || email
   end

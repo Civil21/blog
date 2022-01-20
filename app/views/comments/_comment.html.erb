@@ -3,7 +3,13 @@
     <%=comment.text%>
   </div>
   <div class="">
-    Author: <%=comment.user.username%>
+    Author: <%=comment.user.username%> <%=link_to "X",comment_path(comment), method: :delete, data: {confirm: "Yoy sure?"} if user_signed_in? && current_user == comment.user%>
     commented_at: <%=comment.created_at%>
+  </div>
+  <div class="mx-3">
+    <div class="">
+      <%=render comment.comments%>
+    </div>
+    <%= render "comments/form", commentable:comment%>
   </div>
 </div>

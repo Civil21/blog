@@ -24,7 +24,7 @@ class ArticlesController < ApplicationController
       redirect_to article
 
     else
-      redirect_to articles_path
+      render "new"
     end
   end
 

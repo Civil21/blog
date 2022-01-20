@@ -1,4 +1,9 @@
 <%= form_with model: @article, class:"m-5" do |form| %>
+  <ul>
+    <% @article.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
   <div>
     <%= form.label :title, class:"form-label" %><br>
     <%= form.text_field :title, class:"form-control" %>
