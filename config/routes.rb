@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   devise_for :users
   root to: 'pages#index'
   get 'pages/index'
@@ -7,6 +8,8 @@ Rails.application.routes.draw do
   resources :articles, except: %i[destroy]
 
   resources :comments, only: %i[destroy]
+
+  resources :categories,only: %i[index show]
 
   post ":commentable_type/:commentable_id/comment", to: "comments#create", as: :commentable_comment
 

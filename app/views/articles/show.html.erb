@@ -1,5 +1,10 @@
 <%= image_tag @article.image if @article.image.attached? %>
 <h1><%=@article.title%></h1>
+<%@article.categories.each do |category|%>
+  <span class="badge">
+    <%=link_to category.name, category_path(category)%>
+  </span>
+<%end%>
 <div class="">
   <%= link_to "Edit", edit_article_path(@article), class:"btn btn-warning"%>
 </div>

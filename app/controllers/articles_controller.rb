@@ -29,8 +29,11 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    article.update(article_params)
-    redirect_to article
+    if article.update(article_params)
+      redirect_to article
+    else
+      render "edit"
+    end
   end
 
   private
@@ -40,6 +43,6 @@ class ArticlesController < ApplicationController
   end
 
   def article_params
-    params.require(:article).permit(:title, :body, :image, :user_id, images: [])
+    params.require(:article).permit(:title, :body, :image, :user_id, category_ids: [], images: [])
   end
 end
