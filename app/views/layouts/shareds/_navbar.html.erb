@@ -13,10 +13,14 @@
           <%=link_to "+", new_article_path,class:"btn btn-primary"%>
         </li>
       </ul>
-      <form class="d-flex">
+      <!-- <form class="d-flex">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      </form> -->
+      <%=form_with url: articles_path, method: :get, class:"d-flex" do |f|%>
+        <%=f.text_field :q, value: @q, placeholder: "Search",class:"form-control me-2"%>
+        <%=f.submit "Search" ,class: "btn btn-outline-success"%>
+      <%end%>
       <div class="">
 
         <% if user_signed_in?%>

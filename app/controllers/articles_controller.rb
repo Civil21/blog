@@ -4,6 +4,13 @@ class ArticlesController < ApplicationController
 
   def index
     @articles = Article.all
+    @q = params[:q]
+    if @q
+    # @articles = @articles.where('title ILIKE ?',"%#{@q}%").or(@articles.where('body ILIKE ?',"%#{@q}%"))
+    titles = Arel::Table.new(:articles)[:title]
+    @articles = @articles.where(titles.matches("%#{@q}%"))
+
+    end
   end
 
   def show
@@ -43,6 +50,6 @@ class ArticlesController < ApplicationController
   end
 
   def article_params
-    params.require(:article).permit(:title, :body, :image, :user_id, category_ids: [], images: [])
+    params.require(:article).permit(:title, :body, :image, :user_id, :category_names, images: [])
   end
 end
