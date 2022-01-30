@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_23_153450) do
+ActiveRecord::Schema.define(version: 2022_01_30_150025) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 2022_01_23_153450) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
+    t.integer "likes_count", default: 0, null: false
   end
 
   create_table "categories", force: :cascade do |t|
@@ -64,6 +65,15 @@ ActiveRecord::Schema.define(version: 2022_01_23_153450) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "commentable_id"
     t.string "commentable_type"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.string "object_type", null: false
+    t.bigint "object_id", null: false
+    t.integer "voter_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["object_type", "object_id"], name: "index_likes_on_object"
   end
 
   create_table "tags", force: :cascade do |t|

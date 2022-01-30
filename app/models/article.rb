@@ -6,6 +6,7 @@ class Article < ApplicationRecord
   has_many :comments, as: :commentable
   has_many :tags, dependent: :delete_all
   has_many :categories, through: :tags
+  has_many :likes, as: :object
 
   validates :title, length: {minimum: 5}
   validates :body, length: {minimum: 30}

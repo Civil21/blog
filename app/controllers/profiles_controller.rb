@@ -3,7 +3,7 @@ class ProfilesController < ApplicationController
 
   def show
     @profile = current_user
-    @articles = @profile.articles
+    @articles = @profile.articles.with_attached_image.includes(:categories)
   end
 
 end

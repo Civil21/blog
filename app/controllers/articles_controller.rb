@@ -3,7 +3,7 @@ class ArticlesController < ApplicationController
   before_action :article, only: %i[show edit update]
 
   def index
-    @articles = Article.all
+    @articles = Article.all.with_attached_image.includes(:user,:categories)
     @q = params[:q]
     if @q
     # @articles = @articles.where('title ILIKE ?',"%#{@q}%").or(@articles.where('body ILIKE ?',"%#{@q}%"))
@@ -14,7 +14,7 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    @comments = article.comments
+    @comments = article.comments.includes(:user,:comments)
   end
 
   def new

@@ -5,4 +5,12 @@ class Comment < ApplicationRecord
 
   validates :text, length: {minimum: 1}
 
+  after_create_commit do
+    broadcast_prepend_to "article", target: object_broadcast_name
+  end
+
+  def object_broadcast_name
+    "#{commentable_type.downcase}_#{commentable_id}_comments"
+  end
+
 end

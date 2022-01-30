@@ -7,8 +7,10 @@ class CommentsController < ApplicationController
     @comment.save
 
     return redirect_to(commentable) if commentable.class.name != "Comment"
-
-    redirect_back(fallback_location: root_path)
+    respond_to do |format|
+      format.html { redirect_back(fallback_location: root_path) }
+      format.json { render json: @comment }
+    end
   end
 
   def destroy

@@ -7,6 +7,11 @@
   </div>
   <span class="badge bg-secondary" title="Created"><%=article.created_at%></span>
   <span class="badge bg-primary" title="Author"><%=article.user.username%></span>
+  <span class="badge bg-danger" title="Likes">
+    <span class="like-counter">
+      <%=article.likes.size if article.likes.size > 0%>
+    </span>
+    <a class="like" data-object-id="<%=article.id%>">Like</a></span>
   <div class="">
     <%article.categories.each do |category|%>
       <span class="badge">

@@ -1,3 +1,5 @@
+<%= turbo_stream_from "article" %>
+
 <%= image_tag @article.image if @article.image.attached? %>
 <h1><%=@article.title%></h1>
 <%@article.categories.each do |category|%>
@@ -6,14 +8,22 @@
   </span>
 <%end%>
 <div class="">
-  <%= link_to "Edit", edit_article_path(@article), class:"btn btn-warning"%>
+  <span class="likes">
+    <%=@article.likes.count%>
+  </span>
+  <%= link_to "Like","", class:"like"%>
+</div>
+<div class="">
+  <%= link_to("Edit", edit_article_path(@article), class:"btn btn-warning") if user_signed_in? && current_user.id == @article.user_id%>
 </div>
 <p><%=@article.body%></p>
 <%=render "articles/show/images", images: @article.images%>
 
 <h2>Comments:</h2>
 <div class="">
-  <%=render @comments%>
+  <%= turbo_frame_tag "article_#{@article.id}_comments" do %>
+    <%=render @comments%>
+  <%end%>
 </div>
 <div class="">
   <%= render "comments/form", commentable:@article%>
